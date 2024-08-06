@@ -1,9 +1,11 @@
 return {
+    -- Bottom statusline
     {
 	'nvim-lualine/lualine.nvim',
 	dependencies = { 'nvim-tree/nvim-web-devicons' }
     },
 
+    -- Theme
     {
     "folke/tokyonight.nvim",
     lazy = false, -- make sure we load this during startup if it is your main colorscheme

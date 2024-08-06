@@ -1,9 +1,11 @@
 return {
+    -- Syntax higlighting
     {
 	"nvim-treesitter/nvim-treesitter",
     	build = ":TSUpdate",
     },
 
+    -- Filesystem tree
     {
 	"nvim-tree/nvim-tree.lua",
         version = "*",
@@ -16,6 +18,7 @@ return {
         end,
 	},
 
+    -- Shows keys shortcuts helper
     {
       "folke/which-key.nvim",
       event = "VeryLazy",
