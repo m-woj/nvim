@@ -28,6 +28,21 @@ return {
             "nvim-telescope/telescope.nvim", -- optional
           },
           config = true
-    }
+    },
 
+    -- Packet manager, LSP, formatters etc.
+    {
+        "williamboman/mason.nvim",
+
+        -- LSP
+        "williamboman/mason-lspconfig.nvim",
+        "neovim/nvim-lspconfig",
+
+        -- DAP (Debug Adapter Protocol)
+        "mfussenegger/nvim-dap",
+        { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
+
+        -- Linters Formatters
+        "jose-elias-alvarez/null-ls.nvim"
+    },
 }
