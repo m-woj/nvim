@@ -45,4 +45,10 @@ return {
         -- Linters Formatters
         "jose-elias-alvarez/null-ls.nvim"
     },
+    
+    -- Task runner
+    {
+       'stevearc/overseer.nvim',
+        opts = {},
+    },
 }
