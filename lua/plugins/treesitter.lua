@@ -9,24 +9,6 @@ return {
 		local treesitter = require("nvim-treesitter.configs")
 
 		treesitter.setup({
-			ensure_installed = {
-				"bash",
-				"css",
-				"dockerfile",
-				"html",
-				"javascript",
-				"json",
-				"lua",
-				"markdown",
-				"markdown_inline",
-				"python",
-				"regex",
-				"scss",
-				"sql",
-				"typescript",
-				"vim",
-				"yaml",
-			},
 			highlight = {
 				enable = true,
 			},

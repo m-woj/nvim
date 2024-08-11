@@ -1,6 +1,6 @@
 -- Task runner
 
-return  {
-   'stevearc/overseer.nvim',
-    opts = {},
+return {
+	"stevearc/overseer.nvim",
+	opts = {},
 }
