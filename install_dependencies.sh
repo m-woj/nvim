@@ -1,3 +1,4 @@
-apt install ripgrep nodejs npm fd-find &&\
+apt install ripgrep nodejs npm fd-find python3-pip &&\
     npm install n -g &&\
-    n latest
+    n latest &&\
+    pip3 install pynvim

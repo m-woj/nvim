@@ -1,11 +1,4 @@
-require("options")
-
+require("config.globals")
+require("config.options")
 require("config.lazy")
-
-require("config.lualine")
-require("config.treesitter")
-require("config.lspconfig")
-require("config.mason")
-require("config.overseer")
-
-require("mappings")
+require("config.mappings")

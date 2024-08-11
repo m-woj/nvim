@@ -1,0 +1,16 @@
+DEF_LSP_SERVERS = {
+    "bash-language-server",
+    "black",
+    "clang-format",
+    "css-lsp",
+    "dockerfile-language-server",
+    "eslint-lsp",
+    "html-lsp",
+    "json-lsp",
+    "lua-language-server",
+    "prettierd",
+    "python-lsp-server",
+    "stylua",
+    "tailwindcss-language-server",
+    "typescript-language-server",
+}
