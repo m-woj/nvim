@@ -13,6 +13,7 @@ return {
 
 		lsp.pyright.setup({})
 		lsp.bashls.setup({})
+		lsp.html.setup({})
 		lsp.lua_ls.setup({
 			settings = {
 				Lua = {

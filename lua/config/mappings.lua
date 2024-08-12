@@ -62,3 +62,7 @@ keymap.set("n", "<leader>tc", ":NvimTreeCollapseKeepBuffers<return>", { desc = "
 -- Formatter
 keymap.set("n", "<leader>f", ":Format<CR>", { desc = "Format code" })
 keymap.set("n", "<leader>fw", ":FormatWrite<CR>", { desc = "Format and write code" })
+
+-- Overseer
+keymap.set("n", "<leader>ot", ":OverseerToggle<CR>", { desc = "Toggle Overseer" })
+keymap.set("n", "<leader>r", ":OverseerRun<CR>", { desc = "Overseer tasks run" })
