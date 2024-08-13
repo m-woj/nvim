@@ -66,3 +66,6 @@ keymap.set("n", "<leader>fw", ":FormatWrite<CR>", { desc = "Format and write cod
 -- Overseer
 keymap.set("n", "<leader>ot", ":OverseerToggle<CR>", { desc = "Toggle Overseer" })
 keymap.set("n", "<leader>r", ":OverseerRun<CR>", { desc = "Overseer tasks run" })
+
+-- Buffer manager
+keymap.set("n", "<leader>b", require("buffer_manager.ui").toggle_quick_menu, { desc = "Toggle buffers list"})

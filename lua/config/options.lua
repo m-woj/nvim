@@ -30,3 +30,6 @@ vim.g.loaded_netrwPlugin = 1
 
 -- enabling per project settings contained in .nvim.lua
 vim.o.exrc = true
+
+-- Recommended for auto-session plugin
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
