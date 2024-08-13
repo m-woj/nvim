@@ -17,6 +17,7 @@ vim.opt.splitbelow = true -- open new vertical split bottom
 vim.opt.splitright = true -- open new horizontal splits right
 vim.opt.termguicolors = true -- enabl 24-bit RGB color in the TUI
 vim.opt.showmode = false -- we are experienced, wo don't need the "-- INSERT --" mode hint
+vim.opt.colorcolumn = "80" -- line length marker
 
 -- Searching
 vim.opt.incsearch = true -- search as characters are entered
@@ -32,4 +33,5 @@ vim.g.loaded_netrwPlugin = 1
 vim.o.exrc = true
 
 -- Recommended for auto-session plugin
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.o.sessionoptions =
+    "blank,buffers,curdir,folds,globals,help,tabpages,winsize,winpos,terminal,localoptions"
