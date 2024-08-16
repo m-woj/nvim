@@ -35,3 +35,7 @@ vim.o.exrc = true
 -- Recommended for auto-session plugin
 vim.o.sessionoptions =
     "blank,buffers,curdir,folds,globals,help,tabpages,winsize,winpos,terminal,localoptions"
+
+-- For copilot
+vim.g.copilot_proxy_strict_ssl = false
+

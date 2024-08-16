@@ -46,7 +46,4 @@ return {
 			},
 		})
 	end,
-	build = function()
-		vim.cmd [[TSUpdate]]
-	end,
 }

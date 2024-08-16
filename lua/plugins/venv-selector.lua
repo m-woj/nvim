@@ -7,8 +7,4 @@ return {
 	},
     branch = "regexp", -- This is the regexp branch, use this for the new version
 	opts = {},
-	event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
-	keys = {
-		{ "<leader>vs", "<cmd>VenvSelect<cr>" },
-	},
 }

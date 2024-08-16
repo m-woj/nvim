@@ -82,3 +82,6 @@ keymap.set(
     require("buffer_manager.ui").toggle_quick_menu,
     { desc = "Toggle buffers list" }
 )
+
+-- Venv-selector
+keymap.set("n", "<leader>v", "<cmd>VenvSelect<cr>", { desc = "Select Python environment" })
