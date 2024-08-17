@@ -16,6 +16,9 @@ return {
             },
         })
 
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
         lsp.lua_ls.setup({
             settings = {
                 Lua = {
@@ -25,6 +28,14 @@ return {
                     },
                 },
             },
+        })
+
+        lsp.jinja_lsp.setup({
+            filetypes = { "jinja", "htmldjango" },
+        })
+
+        lsp.html.setup({
+            filetypes = { "htmldjango" },
         })
     end,
 }

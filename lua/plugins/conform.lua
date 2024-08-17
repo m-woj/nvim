@@ -8,6 +8,8 @@ return {
             lua = { "stylua" },
             python = { "isort", "black" }, -- run each sequentially
             javascript = { "prettier", "prettierd", stop_after_first = true },
+            css = { "prettier" },
+            htmldjango = { "djlint" },
         },
     },
 }

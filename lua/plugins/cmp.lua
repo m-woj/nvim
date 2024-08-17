@@ -9,9 +9,11 @@ return {
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
 
+        "L3MON4D3/LuaSnip",
+        "saadparwaiz1/cmp_luasnip",
+
         "windwp/nvim-autopairs",
         "onsails/lspkind-nvim",
-        { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
     },
 
     config = function()
@@ -23,12 +25,18 @@ return {
             snippet = {
                 -- REQUIRED - you must specify a snippet engine
                 expand = function(args)
-                    vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+                    require("luasnip").lsp_expand(args.body)
                 end,
             },
             window = {
                 completion = cmp.config.window.bordered(),
                 documentation = cmp.config.window.bordered(),
+            },
+            formatting = {
+                format = function(entry, vim_item)
+                    vim_item.menu = entry.source.name
+                    return vim_item
+                end,
             },
             mapping = cmp.mapping.preset.insert({
                 ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -40,6 +48,7 @@ return {
             sources = cmp.config.sources({
                 { name = "nvim_lsp_signature_help", group_index = 2 },
                 { name = "nvim_lsp", max_item_count = 20, group_index = 2 },
+                { name = "luasnip", group_index = 2 },
                 { name = "path", group_index = 2 },
                 { name = "buffer", group_index = 2 },
             }),
