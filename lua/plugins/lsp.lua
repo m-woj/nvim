@@ -7,28 +7,17 @@ return {
     config = function()
         local lsp = require("lspconfig")
 
-        require("mason-lspconfig").setup({
-            automatic_installation = true,
-            handlers = {
-                function(server_name)
-                    lsp[server_name].setup({})
-                end,
-            },
-        })
-
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-        -- Capabilities required for the visualstudio lsps (css, html, etc)
-        capabilities.textDocument.completion.completionItem.snippetSupport = true
+        capabilities.textDocument.completion.completionItem.snippetSupport = true -- Capabilities required for the visualstudio lsps (css, html, etc)
 
         lsp.lua_ls.setup({
             capabilites = capabilities,
             settings = {
                 Lua = {
                     diagnostics = {
-                        -- Get the language server to recognize the `vim` global
-                        globals = { "vim" },
+                        globals = { "vim" }, -- Get the language server to recognize the `vim` global
                     },
                 },
             },

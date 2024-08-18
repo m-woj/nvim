@@ -40,7 +40,7 @@ vim.keymap.set("n", "<c-x>", ":bd!<cr>", { desc = "Delete buffer" })
 
 -- Tabs
 keymap.set("n", "<leader><s-tab>", ":tabclose<return>")
-keymap.set("n", "<leader><tab>", ":tabnew<return>")
+keymap.set("n", "<leader><tab>", ":tabedit<return>")
 
 -- telsecope
 local builtin = require("telescope.builtin")
