@@ -79,10 +79,16 @@ keymap.set(
     { desc = "Selected lines git commits" }
 )
 keymap.set(
-    "v",
+    "n",
     prefix .. "s",
     t_builtin.git_status,
     { desc = "Lists current changes per file with diff preview and add action" }
+)
+keymap.set(
+    "n",
+    prefix .. "b",
+    t_builtin.git_branches,
+    { desc = "Lists all branches with log preview" }
 )
 
 -- NvimTree
