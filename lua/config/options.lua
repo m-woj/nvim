@@ -39,3 +39,8 @@ vim.o.sessionoptions =
 -- For copilot
 vim.g.copilot_proxy_strict_ssl = false
 
+
+-- Default settings
+
+-- codeium, copilot
+vim.g.ai_cmp_engine = "codeium"
