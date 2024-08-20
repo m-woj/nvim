@@ -43,19 +43,47 @@ keymap.set("n", "<leader><s-tab>", ":tabclose<return>")
 keymap.set("n", "<leader><tab>", ":tabedit<return>")
 
 -- telsecope
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "search file" })
-vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "search in file" })
-vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "search in buffers" })
-vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "search in help tags" })
+local t_builtin = require("telescope.builtin")
+local prefix = "<leader>s"
+keymap.set("n", prefix .. "f", t_builtin.find_files, { desc = "search file" })
+keymap.set("n", prefix .. "g", t_builtin.live_grep, { desc = "search string" })
+keymap.set("v", prefix .. "g", t_builtin.grep_string, { desc = "search string" })
+keymap.set(
+    "n",
+    prefix .. "b",
+    t_builtin.current_buffer_fuzzy_find,
+    { desc = "search string in buffer" }
+)
+keymap.set("n", prefix .. "h", t_builtin.help_tags, { desc = "search in help tags" })
+keymap.set("n", prefix .. "m", t_builtin.marks, { desc = "search marks" })
+keymap.set("n", prefix .. "q", t_builtin.quickfix, { desc = "Lists items in the quickfix list" })
+keymap.set("n", prefix .. "r", t_builtin.registers, { desc = "Lists vim registers" })
+keymap.set("n", prefix .. "i", t_builtin.lsp_implementations, { desc = "Search implementation" })
+keymap.set("n", prefix .. "d", t_builtin.lsp_definitions, { desc = "Search definition" })
+keymap.set("n", prefix .. "t", t_builtin.lsp_type_definitions, { desc = "Search type definition" })
+keymap.set("n", prefix .. "v", t_builtin.treesitter, { desc = "Search function names, variables" })
 
 -- which-key hints
 vim.keymap.set("n", "<leader>?", function()
     require("which-key").show({ global = false })
 end, { desc = "buffer local keymaps (which-key)" })
 
--- Neogit
-keymap.set("n", "<leader>g", ":Neogit<return>", { desc = "Neogit menu" })
+-- Neogit + Telescope
+prefix = "<leader>g"
+keymap.set("n", prefix .. "g", ":Neogit<return>", { desc = "Neogit menu" })
+keymap.set("n", prefix .. "c", t_builtin.git_bcommits, { desc = "Current buffer git commits" })
+keymap.set(
+    "v",
+    prefix .. "c",
+    t_builtin.git_bcommits_range,
+    { desc = "Selected lines git commits" }
+)
+keymap.set(
+    "v",
+    prefix .. "s",
+    t_builtin.git_status,
+    { desc = "Lists current changes per file with diff preview and add action" }
+)
 
 -- NvimTree
 local ntree = require("nvim-tree.api")
