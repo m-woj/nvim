@@ -33,7 +33,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.o.exrc = true
 
 -- Recommended for auto-session plugin
-vim.o.sessionoptions =
+vim.opt.sessionoptions =
     "blank,buffers,curdir,folds,globals,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- For copilot

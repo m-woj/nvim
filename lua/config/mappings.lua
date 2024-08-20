@@ -91,6 +91,9 @@ keymap.set(
     { desc = "Lists all branches with log preview" }
 )
 
+-- Toggleterm
+keymap.set("n", "<leader>T", ":ToggleTerm<return>", { desc = "Toggle terminal" })
+
 -- NvimTree
 local ntree = require("nvim-tree.api")
 keymap.set("n", "<leader>tt", ntree.tree.toggle, { desc = "Toggle Nvim Tree" })
