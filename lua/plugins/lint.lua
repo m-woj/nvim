@@ -2,7 +2,7 @@ return {
     "mfussenegger/nvim-lint",
     config = function()
         require("lint").linters_by_ft = {
-            python = { "pylint", "mypy", "flake8", "pydocstyle" },
+            python = { "mypy", "flake8" },
             html = { "htmlhint" },
             htmldjango = { "djlint" },
             css = { "stylelint" },

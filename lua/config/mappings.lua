@@ -73,6 +73,14 @@ prefix = "<leader>g"
 keymap.set("n", prefix .. "g", ":Neogit<return>", { desc = "Neogit menu" })
 keymap.set("n", prefix .. "c", t_builtin.git_bcommits, { desc = "Current buffer git commits" })
 keymap.set(
+    "n",
+    prefix .. "C",
+    t_builtin.git_commits,
+    {
+        desc = "Lists git commits with diff preview, checkout action <cr>.",
+    }
+)
+keymap.set(
     "v",
     prefix .. "c",
     t_builtin.git_bcommits_range,
@@ -124,6 +132,46 @@ keymap.set(
 
 -- Venv-selector
 keymap.set("n", "<leader>v", "<cmd>VenvSelect<cr>", { desc = "Select Python environment" })
+
+-- AI
+prefix = "<leader>a"
+if vim.g.ai_cmp_engine == "copilot" then
+    keymap.set("n", prefix .. "c", ":CopilotChatToggle<CR>", { desc = "Toggle Copilot Chat" })
+    keymap.set("n", prefix .. "s", ":CopilotChatStop<CR>", { desc = "Stop current copilot output" })
+    keymap.set("n", prefix .. "R", ":CopilotChatReset<CR>", { desc = "Reset chat window" })
+
+    keymap.set(
+        "v",
+        prefix .. "e",
+        ":CopilotChatExplain<CR>",
+        { desc = "Write an explanation for the active selection as paragraphs of text" }
+    )
+    keymap.set("v", prefix .. "r", ":CopilotChatReview<CR>", { desc = "Review the selected code" })
+    keymap.set(
+        "v",
+        prefix .. "f",
+        ":CopilotChatFix<CR>",
+        { desc = "Rewrite the code to show it with the bug fixed" }
+    )
+    keymap.set(
+        "v",
+        prefix .. "o",
+        ":CopilotChatOptimize<CR>",
+        { desc = "Optimize the selected code to improve performance and readablilty" }
+    )
+    keymap.set(
+        "v",
+        prefix .. "t",
+        ":CopilotChatTests<CR>",
+        { desc = "Please generate tests for my code" }
+    )
+    keymap.set(
+        "v",
+        prefix .. "F",
+        ":CopilotChatFixDiagnostic<CR>",
+        { desc = "Please assist with the following diagnostic issue in file" }
+    )
+end
 
 -- DAP
 vim.keymap.set("n", "<F5>", function()
