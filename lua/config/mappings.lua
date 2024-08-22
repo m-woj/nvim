@@ -72,14 +72,9 @@ end, { desc = "buffer local keymaps (which-key)" })
 prefix = "<leader>g"
 keymap.set("n", prefix .. "g", ":Neogit<return>", { desc = "Neogit menu" })
 keymap.set("n", prefix .. "c", t_builtin.git_bcommits, { desc = "Current buffer git commits" })
-keymap.set(
-    "n",
-    prefix .. "C",
-    t_builtin.git_commits,
-    {
-        desc = "Lists git commits with diff preview, checkout action <cr>.",
-    }
-)
+keymap.set("n", prefix .. "C", t_builtin.git_commits, {
+    desc = "Lists git commits with diff preview, checkout action <cr>.",
+})
 keymap.set(
     "v",
     prefix .. "c",
@@ -186,26 +181,42 @@ end)
 vim.keymap.set("n", "<F12>", function()
     require("dap").step_out()
 end)
-vim.keymap.set("n", "<Leader>p", function()
+
+prefix = "<leader>d"
+vim.keymap.set("n", prefix .. "b", function()
     require("dap").toggle_breakpoint()
-end)
-vim.keymap.set("n", "<Leader>dr", function()
+end, {
+    desc = "Toggle breakpoint",
+})
+vim.keymap.set("n", prefix .. "r", function()
     require("dap").repl.open()
-end)
-vim.keymap.set("n", "<Leader>dl", function()
+end, {
+    desc = "Open REPL",
+})
+vim.keymap.set("n", prefix .. "l", function()
     require("dap").run_last()
-end)
-vim.keymap.set({ "n", "v" }, "<Leader>dh", function()
+end, {
+    desc = "Run last",
+})
+vim.keymap.set({ "n", "v" }, prefix .. "h", function()
     require("dap.ui.widgets").hover()
-end)
-vim.keymap.set({ "n", "v" }, "<Leader>dp", function()
+end, {
+    desc = "Hover widgets",
+})
+vim.keymap.set({ "n", "v" }, prefix .. "p", function()
     require("dap.ui.widgets").preview()
-end)
-vim.keymap.set("n", "<Leader>df", function()
+end, {
+    desc = "Preview",
+})
+vim.keymap.set("n", prefix .. "f", function()
     local widgets = require("dap.ui.widgets")
     widgets.centered_float(widgets.frames)
-end)
-vim.keymap.set("n", "<Leader>ds", function()
+end, {
+    desc = "List frames",
+})
+vim.keymap.set("n", prefix .. "s", function()
     local widgets = require("dap.ui.widgets")
     widgets.centered_float(widgets.scopes)
-end)
+end, {
+    desc = "List scopes",
+})
