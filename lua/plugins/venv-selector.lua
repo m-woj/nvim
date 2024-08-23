@@ -6,5 +6,11 @@ return {
         "mfussenegger/nvim-dap-python",
     },
     branch = "regexp", -- This is the regexp branch, use this for the new version
-    opts = { require_lsp_activation = false },
+    opts = {
+        settings = {
+            options = {
+                require_lsp_activation = false,
+            },
+        },
+    },
 }
