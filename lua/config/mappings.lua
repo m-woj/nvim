@@ -125,6 +125,9 @@ keymap.set(
     { desc = "Toggle buffers list" }
 )
 
+-- Inc rename
+keymap.set("n", "<leader>R", ":IncRename ", { desc = "Incremental rename" })
+
 -- Venv-selector
 keymap.set("n", "<leader>v", "<cmd>VenvSelect<cr>", { desc = "Select Python environment" })
 

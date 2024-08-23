@@ -23,6 +23,11 @@ return {
             },
         })
 
+        lsp.ruff_lsp.setup({
+            capabilites = capabilities,
+            filetypes = { "python" },
+        })
+
         lsp.jinja_lsp.setup({
             capabilites = capabilities,
             filetypes = { "jinja", "htmldjango" },
