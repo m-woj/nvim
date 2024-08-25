@@ -2,6 +2,8 @@
 
 return {
     "williamboman/mason.nvim",
+    lazy = true,
+    event = "VeryLazy",
     dependencies = {
         "jay-babu/mason-nvim-dap.nvim",
         "williamboman/mason-lspconfig.nvim",

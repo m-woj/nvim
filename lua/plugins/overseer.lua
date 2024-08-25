@@ -1,6 +1,8 @@
 -- Task runner
 return {
     "stevearc/overseer.nvim",
+    lazy = true,
+    event = "VeryLazy",
     dependencies = {
         "stevearc/dressing.nvim",
         "nvim-telescope/telescope.nvim",

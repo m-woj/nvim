@@ -1,5 +1,7 @@
 return {
     "mfussenegger/nvim-dap",
+    lazy = true,
+    event = "VeryLazy",
     dependencies = {
         "stevearc/overseer.nvim",
         "mfussenegger/nvim-dap-python",

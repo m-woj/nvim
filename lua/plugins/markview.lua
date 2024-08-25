@@ -1,9 +1,10 @@
 -- Mardown live preview
 return {
     "OXY2DEV/markview.nvim",
-    lazy = false,
+    lazy = true,
+    ft = "markdown",
     dependencies = {
         "nvim-treesitter/nvim-treesitter",
-        "nvim-tree/nvim-web-devicons"
-    }
+        "nvim-tree/nvim-web-devicons",
+    },
 }

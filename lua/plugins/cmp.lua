@@ -1,6 +1,8 @@
 -- Code completion
 return {
     "hrsh7th/nvim-cmp",
+    lazy = true,
+    event = "InsertEnter",
     dependencies = {
         "neovim/nvim-lspconfig",
         "hrsh7th/cmp-nvim-lsp",
