@@ -33,7 +33,7 @@ keymap.set("n", "<C-w><down>", "<C-w>-")
 -- buffer
 vim.keymap.set("n", "<c-s>", ":bnext<cr>", { desc = "next buffer" })
 vim.keymap.set("n", "<c-a>", ":bprev<cr>", { desc = "previous buffer" })
-vim.keymap.set("n", "<c-d>", ":bd!<cr>", { desc = "Delete buffer" })
+vim.keymap.set("n", "<c-x>", ":bd!<cr>", { desc = "Delete buffer" })
 
 -- DAP
 vim.keymap.set("n", "<F5>", function()
