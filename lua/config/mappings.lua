@@ -82,9 +82,21 @@ vim.keymap.set("n", "<leader>?", function()
     require("which-key").show({ global = false })
 end, { desc = "buffer local keymaps (which-key)" })
 
--- Neogit + Telescope
+-- Neogit + DiffView + Telescope
 prefix = "<leader>g"
+-- Neogit
 keymap.set("n", prefix .. "g", ":Neogit<return>", { desc = "Neogit menu" })
+
+-- DiffView
+keymap.set(
+    "n",
+    prefix .. "h",
+    ":DiffviewFileHistory %<cr>",
+    { desc = "DiffView current file history" }
+)
+keymap.set("n", prefix .. "H", ":DiffviewFileHistory<cr>", { desc = "DiffView history" })
+
+-- Telescope
 keymap.set("n", prefix .. "c", t_builtin.git_bcommits, { desc = "Current buffer git commits" })
 keymap.set("n", prefix .. "C", t_builtin.git_commits, {
     desc = "Lists git commits with diff preview, checkout action <cr>.",
