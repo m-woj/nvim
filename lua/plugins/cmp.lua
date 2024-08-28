@@ -13,6 +13,7 @@ return {
 
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
+        "rafamadriz/friendly-snippets",
 
         "windwp/nvim-autopairs",
         "onsails/lspkind-nvim",
@@ -21,6 +22,10 @@ return {
     config = function()
         local cmp = require("cmp")
         local lsp_kind = require("lspkind")
+        local luasnip = require("luasnip")
+        luasnip.filetype_extend("djangohtml", {"djangohtml"})
+        luasnip.filetype_extend("python", {"django"})
+
         lsp_kind.init()
         cmp.setup({
             preselect = cmp.PreselectMode.Item, -- works after pressing <CR>
@@ -48,11 +53,11 @@ return {
                 ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
             }),
             sources = cmp.config.sources({
-                { name = "nvim_lsp_signature_help", group_index = 2 },
-                { name = "nvim_lsp", max_item_count = 20, group_index = 2 },
-                { name = "luasnip", group_index = 2 },
-                { name = "path", group_index = 2 },
-                { name = "buffer", group_index = 2 },
+                { name = "nvim_lsp_signature_help", group_index = 10 },
+                { name = "nvim_lsp", group_index = 10 },
+                { name = "luasnip", group_index = 10 },
+                { name = "path", group_index = 10 },
+                { name = "buffer", group_index = 10 },
             }),
         })
 
