@@ -138,6 +138,10 @@ keymap.set(
 keymap.set("n", "<leader>f", function()
     require("conform").format({ async = true })
 end, { desc = "Format code" })
+keymap.set("n", "<leader>w", function()
+    require("conform").format({ async = true })
+    vim.cmd("write")
+end, { desc = "Format and save code" })
 
 -- Overseer
 keymap.set("n", "<leader>o", ":OverseerToggle<CR>", { desc = "Toggle Overseer" })
@@ -155,7 +159,7 @@ keymap.set(
 keymap.set("n", "<leader>R", ":IncRename ", { desc = "Incremental rename" })
 
 -- Venv-selector
-keymap.set("n", "<leader>v", "<cmd>VenvSelect<cr>", { desc = "Select Python environment" })
+keymap.set("n", "<leader>V", "<cmd>VenvSelect<cr>", { desc = "Select Python environment" })
 
 -- AI
 prefix = "<leader>a"
