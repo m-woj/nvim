@@ -139,7 +139,7 @@ keymap.set("n", "<leader>f", function()
     require("conform").format({ async = true })
 end, { desc = "Format code" })
 keymap.set("n", "<leader>w", function()
-    require("conform").format({ async = true })
+    require("conform").format()
     vim.cmd("write")
 end, { desc = "Format and save code" })
 
