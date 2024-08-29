@@ -11,9 +11,15 @@ return {
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
 
-        "L3MON4D3/LuaSnip",
-        "saadparwaiz1/cmp_luasnip",
-        "rafamadriz/friendly-snippets",
+        {
+            "L3MON4D3/LuaSnip",
+            -- install jsregexp (optional!).
+            build = "make install_jsregexp",
+            dependencies = {
+                "saadparwaiz1/cmp_luasnip",
+                "rafamadriz/friendly-snippets",
+            },
+        },
 
         "windwp/nvim-autopairs",
         "onsails/lspkind-nvim",
@@ -21,11 +27,11 @@ return {
 
     config = function()
         local cmp = require("cmp")
-        local lsp_kind = require("lspkind")
+        require("luasnip.loaders.from_vscode").lazy_load()
         local luasnip = require("luasnip")
-        luasnip.filetype_extend("djangohtml", {"djangohtml"})
-        luasnip.filetype_extend("python", {"django"})
-
+        luasnip.filetype_extend("djangohtml", { "djangohtml" })
+        luasnip.filetype_extend("python", { "django" })
+        local lsp_kind = require("lspkind")
         lsp_kind.init()
         cmp.setup({
             preselect = cmp.PreselectMode.Item, -- works after pressing <CR>
