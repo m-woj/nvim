@@ -240,3 +240,17 @@ vim.keymap.set("n", prefix .. "s", function()
 end, {
     desc = "List scopes",
 })
+
+-- Gitlab
+if vim.g.gitlab_token then
+    local gitlab = require("gitlab")
+    prefix = "<leader>G"
+    vim.keymap.set("n", prefix .. "M", gitlab.choose_merge_request)
+    vim.keymap.set("n", prefix .. "s", gitlab.summary)
+    vim.keymap.set("n", prefix .. "r", gitlab.review)
+    vim.keymap.set("n", prefix .. "b", gitlab.open_in_browser)
+    vim.keymap.set("n", prefix .. "c", gitlab.create_comment)
+    vim.keymap.set("v", prefix .. "c", gitlab.create_multiline_comment)
+    vim.keymap.set("n", prefix .. "n", gitlab.create_note)
+    vim.keymap.set("n", prefix .. "d", gitlab.toggle_discussions)
+end
