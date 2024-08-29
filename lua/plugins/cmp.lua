@@ -29,7 +29,7 @@ return {
         local cmp = require("cmp")
         require("luasnip.loaders.from_vscode").lazy_load()
         local luasnip = require("luasnip")
-        luasnip.filetype_extend("djangohtml", { "djangohtml" })
+        luasnip.filetype_extend("htmldjango", { "djangohtml" })
         luasnip.filetype_extend("python", { "django" })
         local lsp_kind = require("lspkind")
         lsp_kind.init()
