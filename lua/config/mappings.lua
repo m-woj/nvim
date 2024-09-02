@@ -254,3 +254,23 @@ if vim.g.gitlab_token then
     vim.keymap.set("n", prefix .. "n", gitlab.create_note)
     vim.keymap.set("n", prefix .. "d", gitlab.toggle_discussions)
 end
+
+-- Trouble
+prefix = "<leader>x"
+vim.keymap.set("n", prefix .. "X", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics" })
+vim.keymap.set("n", prefix .. "x", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", {
+    desc = "Buffer Diagnostics",
+})
+vim.keymap.set("n", prefix .. "s", "<cmd>Trouble symbols toggle focus=false<cr>", {
+    desc = "Symbols",
+})
+vim.keymap.set(
+    "n",
+    prefix .. "d",
+    "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+    { desc = "LSP Definitions / references" }
+)
+vim.keymap.set("n", prefix .. "l", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List" })
+vim.keymap.set("n", prefix .. "q", "<cmd>Trouble qflist toggle<cr>", {
+    desc = "Quickfix List",
+})
