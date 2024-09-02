@@ -1,15 +1,14 @@
-if vim.g.ai_cmp_engine == "copilot" then
-    return {
-        {
-            "CopilotC-Nvim/CopilotChat.nvim",
-            branch = "canary",
-            dependencies = {
-                { "github/copilot.vim" },
-                { "nvim-lua/plenary.nvim" },
-            },
-            opts = {}
+return {
+    {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        branch = "canary",
+        dependencies = {
+            { "github/copilot.vim" },
+            { "nvim-lua/plenary.nvim" },
         },
-    }
-else
-    return {}
-end
+        enabled = function()
+            return vim.g.ai_cmp_engine == "copilot"
+        end,
+        opts = {},
+    },
+}
