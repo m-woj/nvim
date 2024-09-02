@@ -32,10 +32,5 @@ return {
             capabilites = capabilities,
             filetypes = { "jinja", "htmldjango" },
         })
-
-        lsp.html.setup({
-            capabilites = capabilities,
-            filetypes = { "htmldjango" },
-        })
     end,
 }

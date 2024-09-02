@@ -12,6 +12,7 @@ return {
         settings = {
             options = {
                 require_lsp_activation = false,
+                activate_venv_in_terminal = true,
             },
         },
     },

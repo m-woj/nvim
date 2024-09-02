@@ -12,7 +12,6 @@ return {
             python = { "isort", "black" },
             javascript = { "prettier", "prettierd", stop_after_first = true },
             css = { "prettier" },
-            html = { "prettier" },
             htmldjango = { "djlint" },
         },
     },

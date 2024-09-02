@@ -3,7 +3,7 @@ return {
     config = function()
         local lint = require("lint")
         lint.linters_by_ft = {
-            python = { "mypy", "flake8" },
+            python = { "mypy" },
             html = { "htmlhint" },
             htmldjango = { "djlint" },
             css = { "stylelint" },
