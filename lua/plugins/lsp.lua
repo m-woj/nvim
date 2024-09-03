@@ -39,5 +39,10 @@ return {
             capabilites = capabilities,
             filetypes = { "jinja", "htmldjango" },
         })
+
+        lsp.tsserver.setup({
+            capabilites = capabilities,
+            filetypes = { "javascript", "typescript" },
+        })
     end,
 }
