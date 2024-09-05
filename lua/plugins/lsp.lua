@@ -49,5 +49,15 @@ return {
             capabilites = capabilities,
             filetypes = { "javascript", "typescript" },
         })
+
+        lsp.cssls.setup({
+            capabilites = capabilities,
+            filetypes = { "css", "scss", "less" },
+        })
+
+        lsp.css_variables.setup({
+            capabilites = capabilities,
+            filetypes = { "css", "scss", "less" },
+        })
     end,
 }
