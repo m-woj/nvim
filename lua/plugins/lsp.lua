@@ -45,7 +45,7 @@ return {
             filetypes = { "jinja", "htmldjango" },
         })
 
-        lsp.tsserver.setup({
+        lsp.ts_ls.setup({
             capabilites = capabilities,
             filetypes = { "javascript", "typescript" },
         })
@@ -58,6 +58,11 @@ return {
         lsp.css_variables.setup({
             capabilites = capabilities,
             filetypes = { "css", "scss", "less" },
+        })
+
+        lsp.jsonls.setup({
+            capabilites = capabilities,
+            filetypes = { "json" },
         })
     end,
 }
