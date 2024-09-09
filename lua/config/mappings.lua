@@ -1,28 +1,10 @@
 local keymap = vim.keymap
 
--- increment/decrement
-keymap.set("n", "+", "<c-a>")
-keymap.set("n", "-", "<c-x>")
-
 -- select all
 keymap.set("v", "<c-a>", "gg<s-v>G")
+
+-- replace
 keymap.set("v", "<c-r>", '"hy:%s/<C-r>h//gc<left><left><left>')
-
--- Tabs
-local opts = { noremap = true, silent = true }
-
-keymap.set("n", "<tab>", ":tabnext<return>", opts)
-keymap.set("n", "<s-tab>", ":tabprev<return>", opts)
-
--- Split window
-keymap.set("n", "ss", ":split<Return>", opts)
-keymap.set("n", "sv", ":vsplit<Return>", opts)
-
--- Move window
-keymap.set("n", "sh", "<C-w>h")
-keymap.set("n", "sk", "<C-w>k")
-keymap.set("n", "sj", "<C-w>j")
-keymap.set("n", "sl", "<C-w>l")
 
 -- Resize window
 keymap.set("n", "<C-w><left>", "<C-w><")
@@ -34,6 +16,13 @@ keymap.set("n", "<C-w><down>", "<C-w>-")
 vim.keymap.set("n", "<c-s>", ":bnext<cr>", { desc = "next buffer" })
 vim.keymap.set("n", "<c-a>", ":bprev<cr>", { desc = "previous buffer" })
 vim.keymap.set("n", "<c-x>", ":bd!<cr>", { desc = "Delete buffer" })
+
+vim.keymap.set("n", "<c-l>", ":bnext<cr>", { desc = "next buffer" })
+vim.keymap.set("n", "<c-h>", ":bprev<cr>", { desc = "previous buffer" })
+
+-- tabs
+keymap.set("n", "<c-k>", ":tabnext<return>", { desc = "Next tab" })
+keymap.set("n", "<c-j>", ":tabprevious<return>", { desc = "Previous tab" })
 
 -- DAP
 vim.keymap.set("n", "<F5>", function()
@@ -49,6 +38,11 @@ vim.keymap.set("n", "<F12>", function()
     require("dap").step_out()
 end)
 
+-- Leap
+vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
+vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
+vim.keymap.set({ "n", "x", "o" }, "gs", "<Plug>(leap-from-window)")
+
 -- <leader>-followed
 --------------------------------------------------------------------------------
 
@@ -62,12 +56,7 @@ local prefix = "<leader>s"
 keymap.set("n", prefix .. "f", t_builtin.find_files, { desc = "search file" })
 keymap.set("n", prefix .. "g", t_builtin.live_grep, { desc = "search string" })
 keymap.set("v", prefix .. "g", t_builtin.grep_string, { desc = "search string" })
-keymap.set(
-    "n",
-    prefix .. "b",
-    t_builtin.current_buffer_fuzzy_find,
-    { desc = "search string in buffer" }
-)
+keymap.set("n", prefix .. "b", t_builtin.current_buffer_fuzzy_find, { desc = "search string in buffer" })
 keymap.set("n", prefix .. "h", t_builtin.help_tags, { desc = "search in help tags" })
 keymap.set("n", prefix .. "m", t_builtin.marks, { desc = "search marks" })
 keymap.set("n", prefix .. "q", t_builtin.quickfix, { desc = "Lists items in the quickfix list" })
@@ -88,12 +77,7 @@ prefix = "<leader>g"
 keymap.set("n", prefix .. "g", ":Neogit<return>", { desc = "Neogit menu" })
 
 -- DiffView
-keymap.set(
-    "n",
-    prefix .. "h",
-    ":DiffviewFileHistory %<cr>",
-    { desc = "DiffView current file history" }
-)
+keymap.set("n", prefix .. "h", ":DiffviewFileHistory %<cr>", { desc = "DiffView current file history" })
 keymap.set("n", prefix .. "H", ":DiffviewFileHistory<cr>", { desc = "DiffView history" })
 
 -- Telescope
@@ -101,24 +85,9 @@ keymap.set("n", prefix .. "c", t_builtin.git_bcommits, { desc = "Current buffer 
 keymap.set("n", prefix .. "C", t_builtin.git_commits, {
     desc = "Lists git commits with diff preview, checkout action <cr>.",
 })
-keymap.set(
-    "v",
-    prefix .. "c",
-    t_builtin.git_bcommits_range,
-    { desc = "Selected lines git commits" }
-)
-keymap.set(
-    "n",
-    prefix .. "s",
-    t_builtin.git_status,
-    { desc = "Lists current changes per file with diff preview and add action" }
-)
-keymap.set(
-    "n",
-    prefix .. "b",
-    t_builtin.git_branches,
-    { desc = "Lists all branches with log preview" }
-)
+keymap.set("v", prefix .. "c", t_builtin.git_bcommits_range, { desc = "Selected lines git commits" })
+keymap.set("n", prefix .. "s", t_builtin.git_status, { desc = "Lists current changes per file with diff preview and add action" })
+keymap.set("n", prefix .. "b", t_builtin.git_branches, { desc = "Lists all branches with log preview" })
 
 -- Toggleterm
 keymap.set("n", "<leader>T", ":ToggleTerm<return>", { desc = "Toggle terminal" })
@@ -127,12 +96,7 @@ keymap.set("n", "<leader>T", ":ToggleTerm<return>", { desc = "Toggle terminal" }
 local ntree = require("nvim-tree.api")
 keymap.set("n", "<leader>tt", ntree.tree.toggle, { desc = "Toggle Nvim Tree" })
 keymap.set("n", "<leader>tl", ntree.tree.find_file, { desc = "Localize current file in a Tree" })
-keymap.set(
-    "n",
-    "<leader>tc",
-    ":NvimTreeCollapseKeepBuffers<return>",
-    { desc = "Collapse Tree, except opened buffers" }
-)
+keymap.set("n", "<leader>tc", ":NvimTreeCollapseKeepBuffers<return>", { desc = "Collapse Tree, except opened buffers" })
 
 -- Conform formatter
 keymap.set("n", "<leader>f", function()
@@ -148,12 +112,7 @@ keymap.set("n", "<leader>o", ":OverseerToggle<CR>", { desc = "Toggle Overseer" }
 keymap.set("n", "<leader>r", ":OverseerRun<CR>", { desc = "Overseer tasks run" })
 
 -- Buffer manager
-keymap.set(
-    "n",
-    "<leader>b",
-    require("buffer_manager.ui").toggle_quick_menu,
-    { desc = "Toggle buffers list" }
-)
+keymap.set("n", "<leader>b", require("buffer_manager.ui").toggle_quick_menu, { desc = "Toggle buffers list" })
 
 -- Inc rename
 keymap.set("n", "<leader>R", ":IncRename ", { desc = "Incremental rename" })
@@ -168,37 +127,12 @@ if vim.g.ai_cmp_engine == "copilot" then
     keymap.set("n", prefix .. "s", ":CopilotChatStop<CR>", { desc = "Stop current copilot output" })
     keymap.set("n", prefix .. "R", ":CopilotChatReset<CR>", { desc = "Reset chat window" })
 
-    keymap.set(
-        "v",
-        prefix .. "e",
-        ":CopilotChatExplain<CR>",
-        { desc = "Write an explanation for the active selection as paragraphs of text" }
-    )
+    keymap.set("v", prefix .. "e", ":CopilotChatExplain<CR>", { desc = "Write an explanation for the active selection as paragraphs of text" })
     keymap.set("v", prefix .. "r", ":CopilotChatReview<CR>", { desc = "Review the selected code" })
-    keymap.set(
-        "v",
-        prefix .. "f",
-        ":CopilotChatFix<CR>",
-        { desc = "Rewrite the code to show it with the bug fixed" }
-    )
-    keymap.set(
-        "v",
-        prefix .. "o",
-        ":CopilotChatOptimize<CR>",
-        { desc = "Optimize the selected code to improve performance and readablilty" }
-    )
-    keymap.set(
-        "v",
-        prefix .. "t",
-        ":CopilotChatTests<CR>",
-        { desc = "Please generate tests for my code" }
-    )
-    keymap.set(
-        "v",
-        prefix .. "F",
-        ":CopilotChatFixDiagnostic<CR>",
-        { desc = "Please assist with the following diagnostic issue in file" }
-    )
+    keymap.set("v", prefix .. "f", ":CopilotChatFix<CR>", { desc = "Rewrite the code to show it with the bug fixed" })
+    keymap.set("v", prefix .. "o", ":CopilotChatOptimize<CR>", { desc = "Optimize the selected code to improve performance and readablilty" })
+    keymap.set("v", prefix .. "t", ":CopilotChatTests<CR>", { desc = "Please generate tests for my code" })
+    keymap.set("v", prefix .. "F", ":CopilotChatFixDiagnostic<CR>", { desc = "Please assist with the following diagnostic issue in file" })
 end
 
 -- DAP
@@ -264,13 +198,6 @@ vim.keymap.set("n", prefix .. "x", "<cmd>Trouble diagnostics toggle filter.buf=0
 vim.keymap.set("n", prefix .. "s", "<cmd>Trouble symbols toggle focus=false<cr>", {
     desc = "Symbols",
 })
-vim.keymap.set(
-    "n",
-    prefix .. "d",
-    "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-    { desc = "LSP Definitions / references" }
-)
+vim.keymap.set("n", prefix .. "d", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", { desc = "LSP Definitions / references" })
 vim.keymap.set("n", prefix .. "l", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List" })
-vim.keymap.set("n", prefix .. "q", "<cmd>Trouble qflist toggle<cr>", {
-    desc = "Quickfix List",
-})
+vim.keymap.set("n", prefix .. "q", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List" })
