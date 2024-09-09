@@ -39,9 +39,9 @@ vim.keymap.set("n", "<F12>", function()
 end)
 
 -- Leap
-vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
-vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
-vim.keymap.set({ "n", "x", "o" }, "gs", "<Plug>(leap-from-window)")
+vim.keymap.set({ "n", "x", "o", "v" }, "s", "<Plug>(leap-forward)")
+vim.keymap.set({ "n", "x", "o", "v" }, "S", "<Plug>(leap-backward)")
+vim.keymap.set({ "n", "x", "o", "v" }, "gs", "<Plug>(leap-from-window)")
 
 -- <leader>-followed
 --------------------------------------------------------------------------------
