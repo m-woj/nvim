@@ -153,6 +153,17 @@ return {
             },
         })
 
+        ins_left({
+            function()
+                local linters = require("lint").get_running()
+                if #linters == 0 then
+                    return "󰦕"
+                end
+                return "󱉶 " .. table.concat(linters, ", ")
+            end,
+            color = { fg = colors.orange },
+        })
+
         -- Insert mid section. You can make any number of sections in neovim :)
         -- for lualine it's any number greater then 2
         ins_left({
