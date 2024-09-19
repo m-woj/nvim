@@ -23,7 +23,7 @@ return {
                 init_selection = "<c-q>",
                 node_incremental = "<c-q>",
                 scope_incremental = false,
-                node_decremental = "<c-o>",
+                node_decremental = "<a-q>",
             },
         },
         textobjects = {

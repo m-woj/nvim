@@ -45,6 +45,7 @@ return {
                 -- Disable sections and component separators
                 component_separators = "",
                 section_separators = "",
+                globalstatus = true,
                 theme = {
                     -- We are going to use lualine_c an lualine_x as left and
                     -- right section. Both are highlighted by c theme .  So we
@@ -95,12 +96,12 @@ return {
         ins_left({
             -- mode component
             function()
-                return ""
+                return "🐢 " .. vim.fn.mode() .. " 🐢"
             end,
             color = function()
                 -- auto change color according to neovims mode
                 local mode_color = {
-                    n = colors.red,
+                    n = colors.white,
                     i = colors.green,
                     v = colors.blue,
                     ["␖"] = colors.blue,
@@ -134,11 +135,10 @@ return {
 
         ins_left({
             "filename",
+            path = 1,
             cond = conditions.buffer_not_empty,
             color = { fg = colors.magenta, gui = "bold" },
         })
-
-        ins_left({ "location" })
 
         ins_left({ "progress", color = { fg = colors.fg, gui = "bold" } })
 

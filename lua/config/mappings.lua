@@ -1,7 +1,7 @@
 local keymap = vim.keymap
 
 -- select all
-keymap.set("v", "<c-a>", "gg<s-v>G")
+keymap.set("v", "<c-a>", "gg0<s-v>G$")
 
 -- replace
 keymap.set("v", "<c-r>", '"hy:%s/<C-r>h//gc<left><left><left>')
@@ -17,12 +17,10 @@ vim.keymap.set("n", "<c-s>", ":bnext<cr>", { desc = "next buffer" })
 vim.keymap.set("n", "<c-a>", ":bprev<cr>", { desc = "previous buffer" })
 vim.keymap.set("n", "<c-x>", ":bd!<cr>", { desc = "Delete buffer" })
 
-vim.keymap.set("n", "<c-l>", ":bnext<cr>", { desc = "next buffer" })
-vim.keymap.set("n", "<c-h>", ":bprev<cr>", { desc = "previous buffer" })
-
 -- tabs
-keymap.set("n", "<c-k>", ":tabnext<return>", { desc = "Next tab" })
-keymap.set("n", "<c-j>", ":tabprevious<return>", { desc = "Previous tab" })
+keymap.set("n", "<ca-s>", ":tabnext<return>", { desc = "Next tab" })
+keymap.set("n", "<ca-a>", ":tabprevious<return>", { desc = "Previous tab" })
+keymap.set("n", "<ca-x>", ":tabclose<return>", { desc = "Close tab" })
 
 -- DAP
 vim.keymap.set("n", "<F5>", function()
@@ -45,10 +43,6 @@ vim.keymap.set({ "n", "x", "o", "v" }, "gs", "<Plug>(leap-from-window)")
 
 -- <leader>-followed
 --------------------------------------------------------------------------------
-
--- Tabs
-keymap.set("n", "<leader><s-tab>", ":tabclose<return>")
-keymap.set("n", "<leader><tab>", ":tabedit<return>")
 
 -- telsecope
 local t_builtin = require("telescope.builtin")
@@ -208,3 +202,33 @@ vim.keymap.set("n", prefix .. "s", "<cmd>Trouble symbols toggle focus=false<cr>"
 vim.keymap.set("n", prefix .. "d", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", { desc = "LSP Definitions / references" })
 vim.keymap.set("n", prefix .. "l", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List" })
 vim.keymap.set("n", prefix .. "q", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List" })
+
+-- Harpoon
+local harpoon = require("harpoon")
+local conf = require("telescope.config").values
+local function toggle_telescope(harpoon_files)
+    local file_paths = {}
+    for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+    end
+
+    require("telescope.pickers")
+        .new({}, {
+            prompt_title = "Harpoon",
+            finder = require("telescope.finders").new_table({
+                results = file_paths,
+            }),
+            previewer = conf.file_previewer({}),
+            sorter = conf.generic_sorter({}),
+        })
+        :find()
+end
+vim.keymap.set("n", "<leader>h", function()
+    toggle_telescope(harpoon:list())
+end, { desc = "Open harpoon window" })
+vim.keymap.set("n", "<c-h>", function()
+    harpoon:list():add()
+end)
+vim.keymap.set("n", "<a-h>", function()
+    harpoon:list():remove()
+end)
