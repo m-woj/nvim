@@ -30,7 +30,7 @@ return {
             },
         })
 
-        lsp.ruff_lsp.setup({
+        lsp.pylsp.setup({
             capabilites = capabilities,
             filetypes = { "python" },
         })
