@@ -20,6 +20,7 @@ vim.keymap.set("n", "<c-x>", ":bd!<cr>", { desc = "Delete buffer" })
 -- tabs
 keymap.set("n", "<ca-s>", ":tabnext<return>", { desc = "Next tab" })
 keymap.set("n", "<ca-a>", ":tabprevious<return>", { desc = "Previous tab" })
+keymap.set("n", "<a-t>", ":tabedit<return>", { desc = "New tab" })
 keymap.set("n", "<ca-x>", ":tabclose<return>", { desc = "Close tab" })
 
 -- DAP
