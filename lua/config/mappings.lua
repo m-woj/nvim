@@ -47,6 +47,7 @@ vim.keymap.set({ "n", "x", "o", "v" }, "gs", "<Plug>(leap-from-window)")
 
 -- telsecope
 local t_builtin = require("telescope.builtin")
+keymap.set("n", "<leader>b", t_builtin.buffers, { desc = "search opened buffers" })
 local prefix = "<leader>s"
 keymap.set("n", prefix .. "f", t_builtin.find_files, { desc = "search file" })
 keymap.set("n", prefix .. "g", t_builtin.live_grep, { desc = "search string" })
@@ -107,7 +108,7 @@ keymap.set("n", "<leader>o", ":OverseerToggle<CR>", { desc = "Toggle Overseer" }
 keymap.set("n", "<leader>r", ":OverseerRun<CR>", { desc = "Overseer tasks run" })
 
 -- Buffer manager
-keymap.set("n", "<leader>b", require("buffer_manager.ui").toggle_quick_menu, { desc = "Toggle buffers list" })
+keymap.set("n", "<leader>B", require("buffer_manager.ui").toggle_quick_menu, { desc = "Toggle buffers list" })
 
 -- Inc rename
 keymap.set("n", "<leader>R", ":IncRename ", { desc = "Incremental rename" })
