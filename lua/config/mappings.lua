@@ -12,16 +12,11 @@ keymap.set("n", "<C-w><right>", "<C-w>>")
 keymap.set("n", "<C-w><up>", "<C-w>+")
 keymap.set("n", "<C-w><down>", "<C-w>-")
 
--- buffer
-vim.keymap.set("n", "<c-s>", ":bnext<cr>", { desc = "next buffer" })
-vim.keymap.set("n", "<c-a>", ":bprev<cr>", { desc = "previous buffer" })
-vim.keymap.set("n", "<c-x>", ":bd!<cr>", { desc = "Delete buffer" })
-
 -- tabs
-keymap.set("n", "<ca-s>", ":tabnext<return>", { desc = "Next tab" })
-keymap.set("n", "<ca-a>", ":tabprevious<return>", { desc = "Previous tab" })
+keymap.set("n", "<c-s>", ":tabnext<return>", { desc = "Next tab" })
+keymap.set("n", "<c-a>", ":tabprevious<return>", { desc = "Previous tab" })
 keymap.set("n", "<a-t>", ":tabedit<return>", { desc = "New tab" })
-keymap.set("n", "<ca-x>", ":tabclose<return>", { desc = "Close tab" })
+keymap.set("n", "<c-x>", ":tabclose<return>", { desc = "Close tab" })
 
 -- DAP
 vim.keymap.set("n", "<F5>", function()
