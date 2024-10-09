@@ -1,6 +1,7 @@
 return {
     "nvim-neotest/neotest",
-    veryLazy = true,
+    event = "VeryLazy",
+    lazy = true,
     dependencies = {
         "nvim-neotest/nvim-nio",
         "nvim-neotest/neotest-python",
@@ -10,11 +11,23 @@ return {
         "nvim-treesitter/nvim-treesitter",
     },
     config = function()
-        require("neotest").setup({
+        local neotest = require("neotest")
+        local prefix = "<leader>e"
+        neotest.setup({
             adapters = {
                 require("neotest-python"),
                 require("neotest-plenary"),
             },
         })
+
+        vim.keymap.set("n", prefix .. "R", function()
+            neotest.run.run(vim.fn.expand("%"))
+        end, { desc = "Run tests in current file" })
+        vim.keymap.set("n", prefix .. "r", function()
+            neotest.run.run()
+        end, { desc = "Run closest test" })
+        vim.keymap.set("n", prefix .. "w", function()
+            neotest.summary.toggle()
+        end, { desc = "Toggle tests summary window" })
     end,
 }

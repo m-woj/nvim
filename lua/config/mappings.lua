@@ -231,13 +231,5 @@ vim.keymap.set("n", "<a-h>", function()
 end)
 
 -- Neotest
-prefix = "<leader>e"
-vim.keymap.set("n", prefix .. "R", function()
-    require("neotest").run.run(vim.fn.expand("%"))
-end, { desc = "Run tests in current file" })
-vim.keymap.set("n", prefix .. "r", function()
-    require("neotest").run.run()
-end, { desc = "Run closest test" })
-vim.keymap.set("n", prefix .. "w", function()
-    require("neotest").summary.toggle()
-end, { desc = "Toggle tests summary window" })
+-- prefix with a e
+-- moved to lua/plugins/neotest.lua because of long load time
