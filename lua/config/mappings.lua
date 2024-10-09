@@ -229,3 +229,12 @@ end)
 vim.keymap.set("n", "<a-h>", function()
     harpoon:list():remove()
 end)
+
+-- Neotest
+prefix = "<leader>e"
+vim.keymap.set("n", prefix .. "r", function()
+    require("neotest").run.run(vim.fn.expand("%"))
+end, { desc = "Run tests in current file" })
+vim.keymap.set("n", prefix .. "w", function()
+    require("neotest").summary.toggle()
+end, { desc = "Toggle tests summary window" })
