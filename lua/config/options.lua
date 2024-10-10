@@ -29,6 +29,10 @@ vim.opt.smartcase = true -- but make it case sensitive if an uppercase is entere
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- Show line diagnostics automatically in hover window
+vim.o.updatetime = 250
+vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
+
 -- enabling per project settings contained in .nvim.lua
 vim.o.exrc = true
 

@@ -200,36 +200,6 @@ vim.keymap.set("n", prefix .. "d", "<cmd>Trouble lsp toggle focus=false win.posi
 vim.keymap.set("n", prefix .. "l", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List" })
 vim.keymap.set("n", prefix .. "q", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List" })
 
--- Harpoon
-local harpoon = require("harpoon")
-local conf = require("telescope.config").values
-local function toggle_telescope(harpoon_files)
-    local file_paths = {}
-    for _, item in ipairs(harpoon_files.items) do
-        table.insert(file_paths, item.value)
-    end
-
-    require("telescope.pickers")
-        .new({}, {
-            prompt_title = "Harpoon",
-            finder = require("telescope.finders").new_table({
-                results = file_paths,
-            }),
-            previewer = conf.file_previewer({}),
-            sorter = conf.generic_sorter({}),
-        })
-        :find()
-end
-vim.keymap.set("n", "<leader>h", function()
-    toggle_telescope(harpoon:list())
-end, { desc = "Open harpoon window" })
-vim.keymap.set("n", "<c-h>", function()
-    harpoon:list():add()
-end)
-vim.keymap.set("n", "<a-h>", function()
-    harpoon:list():remove()
-end)
-
 -- Neotest
 -- prefix with a e
 -- moved to lua/plugins/neotest.lua because of long load time
