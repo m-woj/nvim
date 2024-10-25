@@ -91,7 +91,7 @@ keymap.set("n", "<leader>tc", ":NvimTreeCollapseKeepBuffers<return>", { desc = "
 
 -- Conform formatter
 keymap.set("n", "<leader>f", function()
-    require("conform").format({ async = true })
+    require("conform").format()
 end, { desc = "Format code" })
 keymap.set("n", "<leader>w", function()
     require("conform").format()
