@@ -200,6 +200,14 @@ vim.keymap.set("n", prefix .. "d", "<cmd>Trouble lsp toggle focus=false win.posi
 vim.keymap.set("n", prefix .. "l", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List" })
 vim.keymap.set("n", prefix .. "q", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List" })
 
+-- Spectre
+vim.keymap.set("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
+    desc = "Toggle Spectre",
+})
+vim.keymap.set("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+    desc = "Search current word",
+})
+
 -- Neotest
 -- prefix with a e
 -- moved to lua/plugins/neotest.lua because of long load time
