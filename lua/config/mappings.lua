@@ -112,7 +112,7 @@ keymap.set("n", "<leader>R", ":IncRename ", { desc = "Incremental rename" })
 keymap.set("n", "<leader>V", "<cmd>VenvSelect<cr>", { desc = "Select Python environment" })
 
 -- AI
-prefix = "<leader>a"
+prefix = "<leader>c"
 if vim.g.ai_cmp_engine == "copilot" then
     keymap.set("n", prefix .. "c", ":CopilotChatToggle<CR>", { desc = "Toggle Copilot Chat" })
     keymap.set("n", prefix .. "s", ":CopilotChatStop<CR>", { desc = "Stop current copilot output" })
