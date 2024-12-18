@@ -8,7 +8,16 @@ return {
         copilot = {
             max_tokens = 8192,
         },
+        claude = {
+            endpoint = "https://api.anthropic.com",
+            model = "claude-3-5-sonnet-20241022",
+            temperature = 0,
+            max_tokens = 4096,
+        },
     },
+    enabled = function()
+        return vim.g.avante_provider ~= nil and vim.g.avante_provider ~= ""
+    end,
     build = "make",
     dependencies = {
         "nvim-treesitter/nvim-treesitter",

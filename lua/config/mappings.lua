@@ -209,5 +209,5 @@ vim.keymap.set("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({sele
 })
 
 -- Neotest
--- prefix with a e
+-- prefix e
 -- moved to lua/plugins/neotest.lua because of long load time
