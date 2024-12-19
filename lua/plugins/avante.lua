@@ -9,10 +9,7 @@ return {
             max_tokens = 8192,
         },
         claude = {
-            endpoint = "https://api.anthropic.com",
-            model = "claude-3-5-sonnet-20241022",
-            temperature = 0,
-            max_tokens = 4096,
+            max_tokens = 8192,
         },
     },
     enabled = function()
@@ -93,6 +90,15 @@ return {
             apply_cursor = "a",
             switch_windows = "<Tab>",
             reverse_switch_windows = "<S-Tab>",
+        },
+    },
+    keys = {
+        {
+            "<leader>ip",
+            function()
+                return vim.bo.filetype == "AvanteInput" and require("avante.clipboard").paste_image() or require("img-clip").paste_image()
+            end,
+            desc = "clip: paste image",
         },
     },
 }
