@@ -36,7 +36,7 @@ return {
                         },
                         schema = {
                             model = {
-                                default = "mistral-nemo",
+                                default = "deepseek-coder-v2",
                             },
                         },
                     })

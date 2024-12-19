@@ -46,6 +46,3 @@ vim.g.copilot_proxy_strict_ssl = false
 
 -- codeium, copilot
 vim.g.ai_cmp_engine = "codeium"
-
--- copilot, ollama
-vim.g.ai_chat = "ollama"

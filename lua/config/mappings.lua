@@ -125,8 +125,8 @@ if vim.g.ai_cmp_engine == "copilot" then
     keymap.set("v", prefix .. "t", ":CopilotChatTests<CR>", { desc = "Please generate tests for my code" })
     keymap.set("v", prefix .. "F", ":CopilotChatFixDiagnostic<CR>", { desc = "Please assist with the following diagnostic issue in file" })
 else
-    vim.api.nvim_set_keymap("n", prefix .. "c", "<cmd>CodeCompanionToggle<cr>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("v", prefix .. "c", "<cmd>CodeCompanionToggle<cr>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("n", prefix .. "c", "<cmd>CodeCompanionChat<cr>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("v", prefix .. "c", "<cmd>CodeCompanionChat<cr>", { noremap = true, silent = true })
     vim.api.nvim_set_keymap("n", prefix .. "a", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
     vim.api.nvim_set_keymap("v", prefix .. "a", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
     -- Expand 'cc' into 'CodeCompanion' in the command line

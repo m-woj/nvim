@@ -2,13 +2,9 @@ return {
     "yetone/avante.nvim",
     event = "VeryLazy",
     lazy = false,
-    version = false, -- set this if you want to always pull the latest change
     opts = {
         provider = vim.g.avante_provider,
         copilot = {
-            max_tokens = 8192,
-        },
-        claude = {
             max_tokens = 8192,
         },
     },
