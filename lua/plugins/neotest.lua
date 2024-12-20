@@ -18,6 +18,11 @@ return {
                 require("neotest-python"),
                 require("neotest-plenary"),
             },
+            discovery = {
+                filter_dir = function(name, rel_path, root)
+                    return not name:match("^%.?venv")
+                end,
+            },
         })
 
         vim.keymap.set("n", prefix .. "R", function()
