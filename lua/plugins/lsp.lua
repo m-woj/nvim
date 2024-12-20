@@ -3,61 +3,25 @@ return {
     lazy = true,
     event = "BufReadPost",
     dependencies = {
+        "saghen/blink.cmp",
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
     },
-    config = function()
+    opts = {
+        servers = {
+            lua_ls = {},
+        },
+    },
+    config = function(_, opts)
         require("mason").setup()
         require("mason-lspconfig").setup()
-        local lsp = require("lspconfig")
 
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
-        -- Capabilities required for the visualstudio lsps (css, html, etc)
-        capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-        -- After setting up mason-lspconfig you may set up servers via lspconfig
-        lsp.lua_ls.setup({
-            capabilites = capabilities,
-            settings = {
-                Lua = {
-                    diagnostics = {
-                        -- Get the language server to recognize the `vim` global
-                        globals = { "vim" },
-                    },
-                },
-            },
-        })
-
-        lsp.pylsp.setup({
-            capabilites = capabilities,
-            filetypes = { "python" },
-        })
-
-        lsp.jinja_lsp.setup({
-            capabilites = capabilities,
-            filetypes = { "jinja", "htmldjango" },
-        })
-
-        lsp.ts_ls.setup({
-            capabilites = capabilities,
-            filetypes = { "javascript", "typescript" },
-        })
-
-        lsp.cssls.setup({
-            capabilites = capabilities,
-            filetypes = { "css", "scss", "less" },
-        })
-
-        lsp.css_variables.setup({
-            capabilites = capabilities,
-            filetypes = { "css", "scss", "less" },
-        })
-
-        lsp.jsonls.setup({
-            capabilites = capabilities,
-            filetypes = { "json" },
-        })
+        local lspconfig = require("lspconfig")
+        for server, config in pairs(opts.servers) do
+            -- passing config.capabilities to blink.cmp merges with the capabilities in your
+            -- `opts[server].capabilities, if you've defined it
+            config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+            lspconfig[server].setup(config)
+        end
     end,
 }
