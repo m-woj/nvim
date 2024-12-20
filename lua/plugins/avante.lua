@@ -5,7 +5,7 @@ return {
     opts = {
         provider = vim.g.avante_provider,
         copilot = {
-            max_tokens = 8192,
+            max_tokens = 16000,
         },
     },
     enabled = function()
