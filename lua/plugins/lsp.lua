@@ -38,6 +38,10 @@ return {
             filetypes = { "jinja", "htmldjango" },
         })
 
+        lsp.tailwindcss.setup({
+            filetypes = { "html", "htmldjango" },
+        })
+
         lsp.ts_ls.setup({
             filetypes = { "javascript", "typescript" },
         })
