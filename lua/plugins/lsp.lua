@@ -34,6 +34,10 @@ return {
             filetypes = { "python" },
         })
 
+        lsp.pylsp.setup({
+            filetypes = { "python" },
+        })
+
         lsp.jinja_lsp.setup({
             filetypes = { "jinja", "htmldjango" },
         })
