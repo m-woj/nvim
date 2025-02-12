@@ -7,13 +7,13 @@ return {
     },
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
-    lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
     init = function(plugin)
         require("lazy.core.loader").add_to_rtp(plugin)
         require("nvim-treesitter.query_predicates")
     end,
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     opts = {
+        ensure_installed = { "diff" },
         highlight = { enable = true },
         indent = { enable = true },
         auto_install = true,
