@@ -10,10 +10,11 @@ return {
             lua = { "stylua" },
             python = { "ruff_fix", "ruff_organize_imports", "ruff_format" },
             javascript = { "prettier" },
+            typescript = { "prettier" },
             css = { "prettier" },
             scss = { "prettier" },
             html = { "prettier" },
-            htmldjango = { "djlint" },
+            htmldjango = { "prettier" },
         },
     },
 }
