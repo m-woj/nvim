@@ -58,10 +58,6 @@ return {
             filetypes = { "css", "scss", "less" },
         })
 
-        lsp.css_variables.setup({
-            filetypes = { "css", "scss", "less" },
-        })
-
         lsp.jsonls.setup({
             filetypes = { "json" },
         })
