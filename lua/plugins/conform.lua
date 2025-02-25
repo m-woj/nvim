@@ -14,7 +14,7 @@ return {
             css = { "prettier" },
             scss = { "prettier" },
             html = { "prettier" },
-            htmldjango = { "prettier" },
+            htmldjango = { "djlint" },
         },
     },
 }

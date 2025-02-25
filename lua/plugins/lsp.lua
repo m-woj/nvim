@@ -39,11 +39,15 @@ return {
         })
 
         lsp.jinja_lsp.setup({
-            filetypes = { "jinja", "htmldjango" },
+            filetypes = { "jinja" },
         })
 
         lsp.tailwindcss.setup({
             filetypes = { "html", "htmldjango" },
+        })
+
+        lsp.djlsp.setup({
+            filetypes = { "htmldjango" },
         })
 
         lsp.ts_ls.setup({
