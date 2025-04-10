@@ -9,6 +9,12 @@ return {
         provider = vim.g.avante_provider,
         copilot = {
             max_tokens = 16000,
+            disable_tools = true, -- disable tools!
+        },
+
+        claude = {
+            max_tokens = 4096,
+            disable_tools = true, -- disable tools!
         },
 
         --- @class AvanteRepoMapConfig
