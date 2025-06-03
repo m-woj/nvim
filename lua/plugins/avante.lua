@@ -7,16 +7,38 @@ return {
     end,
     opts = {
         provider = vim.g.avante_provider,
-        copilot = {
-            max_tokens = 16000,
-            disable_tools = true, -- disable tools!
+        mode = "agentic",
+        cursor_applying_provider = vim.g.cursor_applying_provider,
+        behaviour = {
+            enable_cursor_planning_mode = true,
         },
+        providers = {
+            claude = {
+                extra_request_body = {
+                    max_tokens = 4096,
+                },
+            },
 
-        claude = {
-            max_tokens = 4096,
-            disable_tools = true, -- disable tools!
+            deepseek = {
+                __inherited_from = "openai",
+                api_key_name = "DEEPSEEK_API_KEY",
+                endpoint = "https://api.deepseek.com",
+                model = "deepseek-coder",
+            },
+            groq = {
+                __inherited_from = "openai",
+                api_key_name = "GROQ_API_KEY",
+                endpoint = "https://api.groq.com/openai/v1/",
+                model = "llama-3.1-70b-versatile",
+                extra_request_body = {
+                    max_completion_tokens = 32768,
+                },
+            },
+            ollama = {
+                endpoint = "http://localhost:11434",
+                model = "mistral-nemo:latest",
+            },
         },
-
         --- @class AvanteRepoMapConfig
         repo_map = {
             ignore_patterns = { "%.git", "%.worktree", "__pycache__", "node_modules", ".venv*", "venv*" }, -- ignore files matching these
