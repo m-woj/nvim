@@ -7,7 +7,7 @@ return {
     end,
     opts = {
         provider = vim.g.avante_provider,
-        mode = "agentic",
+        mode = "legacy",
         cursor_applying_provider = vim.g.cursor_applying_provider,
         behaviour = {
             enable_cursor_planning_mode = true,
@@ -18,7 +18,13 @@ return {
                     max_tokens = 4096,
                 },
             },
-
+            copilot = {
+                endpoint = "https://api.githubcopilot.com",
+                model = "gpt-4.1-2025-04-14",
+                extra_request_body = {
+                    max_tokens = 40960,
+                },
+            },
             deepseek = {
                 __inherited_from = "openai",
                 api_key_name = "DEEPSEEK_API_KEY",
