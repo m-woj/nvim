@@ -85,9 +85,10 @@ keymap.set("n", "<leader>T", ":ToggleTerm<return>", { desc = "Toggle terminal" }
 
 -- NvimTree
 local ntree = require("nvim-tree.api")
-keymap.set("n", "<leader>tt", ntree.tree.toggle, { desc = "Toggle Nvim Tree" })
-keymap.set("n", "<leader>tl", ntree.tree.find_file, { desc = "Localize current file in a Tree" })
-keymap.set("n", "<leader>tc", ":NvimTreeCollapseKeepBuffers<return>", { desc = "Collapse Tree, except opened buffers" })
+prefix = "<leader>t"
+keymap.set("n", prefix .. "t", ntree.tree.toggle, { desc = "Toggle Nvim Tree" })
+keymap.set("n", prefix .. "l", ntree.tree.find_file, { desc = "Localize current file in a Tree" })
+keymap.set("n", prefix .. "c", ":NvimTreeCollapseKeepBuffers<return>", { desc = "Collapse Tree, except opened buffers" })
 
 -- Conform formatter
 keymap.set("n", "<leader>f", function()
