@@ -89,6 +89,12 @@ prefix = "<leader>t"
 keymap.set("n", prefix .. "t", ntree.tree.toggle, { desc = "Toggle Nvim Tree" })
 keymap.set("n", prefix .. "l", ntree.tree.find_file, { desc = "Localize current file in a Tree" })
 keymap.set("n", prefix .. "c", ":NvimTreeCollapseKeepBuffers<return>", { desc = "Collapse Tree, except opened buffers" })
+keymap.set("n", prefix .. "r", ntree.tree.reload, { desc = "Refresh Tree" })
+keymap.set("n", prefix .. "a", ntree.tree.expand_all, { desc = "Expand all nodes" })
+keymap.set("n", prefix .. "A", ntree.tree.collapse_all, { desc = "Collapse all nodes" })
+keymap.set("n", prefix .. "f", ntree.tree.search_node, { desc = "Search/filter nodes" })
+keymap.set("n", prefix .. "h", ntree.tree.toggle_help, { desc = "Toggle help" })
+keymap.set("n", prefix .. "g", ntree.tree.toggle_gitignore_filter, { desc = "Toggle gitignore filter" })
 
 -- Conform formatter
 keymap.set("n", "<leader>f", function()
