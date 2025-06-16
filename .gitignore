@@ -2,3 +2,4 @@ lazy-lock.json
 .nvim*
 
 /lua/config/custom.lua
+.aider*
