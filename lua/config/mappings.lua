@@ -122,28 +122,6 @@ keymap.set("n", "<leader>R", ":IncRename ", { desc = "Incremental rename" })
 -- Venv-selector
 keymap.set("n", "<leader>V", "<cmd>VenvSelect<cr>", { desc = "Select Python environment" })
 
--- AI
-prefix = "<leader>c"
-if vim.g.ai_cmp_engine == "copilot" then
-    keymap.set("n", prefix .. "c", ":CopilotChatToggle<CR>", { desc = "Toggle Copilot Chat" })
-    keymap.set("n", prefix .. "s", ":CopilotChatStop<CR>", { desc = "Stop current copilot output" })
-    keymap.set("n", prefix .. "R", ":CopilotChatReset<CR>", { desc = "Reset chat window" })
-
-    keymap.set("v", prefix .. "e", ":CopilotChatExplain<CR>", { desc = "Write an explanation for the active selection as paragraphs of text" })
-    keymap.set("v", prefix .. "r", ":CopilotChatReview<CR>", { desc = "Review the selected code" })
-    keymap.set("v", prefix .. "f", ":CopilotChatFix<CR>", { desc = "Rewrite the code to show it with the bug fixed" })
-    keymap.set("v", prefix .. "o", ":CopilotChatOptimize<CR>", { desc = "Optimize the selected code to improve performance and readablilty" })
-    keymap.set("v", prefix .. "t", ":CopilotChatTests<CR>", { desc = "Please generate tests for my code" })
-    keymap.set("v", prefix .. "F", ":CopilotChatFixDiagnostic<CR>", { desc = "Please assist with the following diagnostic issue in file" })
-else
-    vim.api.nvim_set_keymap("n", prefix .. "c", "<cmd>CodeCompanionChat<cr>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("v", prefix .. "c", "<cmd>CodeCompanionChat<cr>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("n", prefix .. "a", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap("v", prefix .. "a", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
-    -- Expand 'cc' into 'CodeCompanion' in the command line
-    vim.cmd([[cab cc CodeCompanion]])
-end
-
 -- DAP
 prefix = "<leader>d"
 vim.keymap.set("n", prefix .. "b", function()
