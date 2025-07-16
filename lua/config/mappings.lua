@@ -1,202 +1,268 @@
+-- Compatibility for Lua 5.1/5.2+
+table.unpack = table.unpack or unpack
+
 local keymap = vim.keymap
 
--- select all
+-- Select all
 keymap.set("v", "<c-a>", "gg0<s-v>G$")
 
--- replace
+-- Replace selection
 keymap.set("v", "<c-r>", '"hy:%s/<C-r>h//gc<left><left><left>')
 
--- Resize window
-keymap.set("n", "<C-w><left>", "<C-w><")
-keymap.set("n", "<C-w><right>", "<C-w>>")
-keymap.set("n", "<C-w><up>", "<C-w>+")
-keymap.set("n", "<C-w><down>", "<C-w>-")
+-- Window resizing
+local resize_keys = {
+    ["<C-w><left>"] = "<C-w><",
+    ["<C-w><right>"] = "<C-w>>",
+    ["<C-w><up>"] = "<C-w>+",
+    ["<C-w><down>"] = "<C-w>-",
+}
+for k, v in pairs(resize_keys) do
+    keymap.set("n", k, v)
+end
 
--- tabs
-keymap.set("n", "<c-s>", ":tabnext<return>", { desc = "Next tab" })
-keymap.set("n", "<c-a>", ":tabprevious<return>", { desc = "Previous tab" })
-keymap.set("n", "<a-t>", ":tabedit<return>", { desc = "New tab" })
-keymap.set("n", "<c-x>", ":tabclose<return>", { desc = "Close tab" })
+-- Tabs
+local tab_keys = {
+    { "n", "<c-s>", ":tabnext<return>", { desc = "Next tab" } },
+    { "n", "<c-a>", ":tabprevious<return>", { desc = "Previous tab" } },
+    { "n", "<a-t>", ":tabedit<return>", { desc = "New tab" } },
+    { "n", "<c-x>", ":tabclose<return>", { desc = "Close tab" } },
+}
+for _, args in ipairs(tab_keys) do
+    keymap.set(table.unpack(args))
+end
 
--- DAP
-vim.keymap.set("n", "<F5>", function()
-    require("dap").continue()
-end)
-vim.keymap.set("n", "<F10>", function()
-    require("dap").step_over()
-end)
-vim.keymap.set("n", "<F11>", function()
-    require("dap").step_into()
-end)
-vim.keymap.set("n", "<F12>", function()
-    require("dap").step_out()
-end)
+-- DAP (Debug Adapter Protocol)
+local dap_keys = {
+    {
+        "n",
+        "<F5>",
+        function()
+            require("dap").continue()
+        end,
+    },
+    {
+        "n",
+        "<F10>",
+        function()
+            require("dap").step_over()
+        end,
+    },
+    {
+        "n",
+        "<F11>",
+        function()
+            require("dap").step_into()
+        end,
+    },
+    {
+        "n",
+        "<F12>",
+        function()
+            require("dap").step_out()
+        end,
+    },
+}
+for _, args in ipairs(dap_keys) do
+    keymap.set(table.unpack(args))
+end
 
 -- Leap
-vim.keymap.set({ "n", "x", "o", "v" }, "s", "<Plug>(leap-forward)")
-vim.keymap.set({ "n", "x", "o", "v" }, "S", "<Plug>(leap-backward)")
-vim.keymap.set({ "n", "x", "o", "v" }, "gs", "<Plug>(leap-from-window)")
+local leap_keys = {
+    { { "n", "x", "o", "v" }, "s", "<Plug>(leap-forward)" },
+    { { "n", "x", "o", "v" }, "S", "<Plug>(leap-backward)" },
+    { { "n", "x", "o", "v" }, "gs", "<Plug>(leap-from-window)" },
+}
+for _, args in ipairs(leap_keys) do
+    keymap.set(table.unpack(args))
+end
 
--- <leader>-followed
---------------------------------------------------------------------------------
-
--- telsecope
+-- Telescope
 local t_builtin = require("telescope.builtin")
-keymap.set("n", "<leader>b", t_builtin.buffers, { desc = "search opened buffers" })
-local prefix = "<leader>s"
-keymap.set("n", prefix .. "f", t_builtin.find_files, { desc = "search file" })
-keymap.set("n", prefix .. "g", t_builtin.live_grep, { desc = "search string" })
-keymap.set("v", prefix .. "g", t_builtin.grep_string, { desc = "search string" })
-keymap.set("n", prefix .. "b", t_builtin.current_buffer_fuzzy_find, { desc = "search string in buffer" })
-keymap.set("n", prefix .. "h", t_builtin.help_tags, { desc = "search in help tags" })
-keymap.set("n", prefix .. "m", t_builtin.marks, { desc = "search marks" })
-keymap.set("n", prefix .. "q", t_builtin.quickfix, { desc = "Lists items in the quickfix list" })
-keymap.set("n", prefix .. "r", t_builtin.registers, { desc = "Lists vim registers" })
-keymap.set("n", prefix .. "i", t_builtin.lsp_implementations, { desc = "Search implementation" })
-keymap.set("n", prefix .. "d", t_builtin.lsp_definitions, { desc = "Search definition" })
-keymap.set("n", prefix .. "t", t_builtin.lsp_type_definitions, { desc = "Search type definition" })
-keymap.set("n", prefix .. "v", t_builtin.treesitter, { desc = "Search function names, variables" })
+local telescope_prefix = "<leader>s"
+local telescope_keys = {
+    { "n", "<leader>b", t_builtin.buffers, { desc = "search opened buffers" } },
+    { "n", telescope_prefix .. "f", t_builtin.find_files, { desc = "search file" } },
+    { "n", telescope_prefix .. "g", t_builtin.live_grep, { desc = "search string" } },
+    { "v", telescope_prefix .. "g", t_builtin.grep_string, { desc = "search string" } },
+    { "n", telescope_prefix .. "b", t_builtin.current_buffer_fuzzy_find, { desc = "search string in buffer" } },
+    { "n", telescope_prefix .. "h", t_builtin.help_tags, { desc = "search in help tags" } },
+    { "n", telescope_prefix .. "m", t_builtin.marks, { desc = "search marks" } },
+    { "n", telescope_prefix .. "q", t_builtin.quickfix, { desc = "Lists items in the quickfix list" } },
+    { "n", telescope_prefix .. "r", t_builtin.registers, { desc = "Lists vim registers" } },
+    { "n", telescope_prefix .. "i", t_builtin.lsp_implementations, { desc = "Search implementation" } },
+    { "n", telescope_prefix .. "d", t_builtin.lsp_definitions, { desc = "Search definition" } },
+    { "n", telescope_prefix .. "t", t_builtin.lsp_type_definitions, { desc = "Search type definition" } },
+    { "n", telescope_prefix .. "v", t_builtin.treesitter, { desc = "Search function names, variables" } },
+}
+for _, args in ipairs(telescope_keys) do
+    keymap.set(table.unpack(args))
+end
 
--- which-key hints
-vim.keymap.set("n", "<leader>?", function()
+-- Which-key hints
+keymap.set("n", "<leader>?", function()
     require("which-key").show({ global = false })
 end, { desc = "buffer local keymaps (which-key)" })
 
--- Neogit + DiffView + Telescope
-prefix = "<leader>g"
--- Neogit
-keymap.set("n", prefix .. "g", ":Neogit<return>", { desc = "Neogit menu" })
+-- Git (Neogit, DiffView, Telescope)
+local git_prefix = "<leader>g"
+local git_keys = {
+    { "n", git_prefix .. "g", ":Neogit<return>", { desc = "Neogit menu" } },
+    { "n", git_prefix .. "h", ":DiffviewFileHistory %<cr>", { desc = "DiffView current file history" } },
+    { "n", git_prefix .. "H", ":DiffviewFileHistory<cr>", { desc = "DiffView history" } },
+    { "n", git_prefix .. "c", t_builtin.git_bcommits, { desc = "Current buffer git commits" } },
+    { "n", git_prefix .. "C", t_builtin.git_commits, { desc = "Lists git commits with diff preview, checkout action <cr>." } },
+    { "v", git_prefix .. "c", t_builtin.git_bcommits_range, { desc = "Selected lines git commits" } },
+    { "n", git_prefix .. "s", t_builtin.git_status, { desc = "Lists current changes per file with diff preview and add action" } },
+    { "n", git_prefix .. "b", t_builtin.git_branches, { desc = "Lists all branches with log preview" } },
+}
+for _, args in ipairs(git_keys) do
+    keymap.set(table.unpack(args))
+end
 
--- DiffView
-keymap.set("n", prefix .. "h", ":DiffviewFileHistory %<cr>", { desc = "DiffView current file history" })
-keymap.set("n", prefix .. "H", ":DiffviewFileHistory<cr>", { desc = "DiffView history" })
-
--- Telescope
-keymap.set("n", prefix .. "c", t_builtin.git_bcommits, { desc = "Current buffer git commits" })
-keymap.set("n", prefix .. "C", t_builtin.git_commits, {
-    desc = "Lists git commits with diff preview, checkout action <cr>.",
-})
-keymap.set("v", prefix .. "c", t_builtin.git_bcommits_range, { desc = "Selected lines git commits" })
-keymap.set("n", prefix .. "s", t_builtin.git_status, { desc = "Lists current changes per file with diff preview and add action" })
-keymap.set("n", prefix .. "b", t_builtin.git_branches, { desc = "Lists all branches with log preview" })
-
--- Toggleterm
+-- Terminal (Toggleterm)
 keymap.set("n", "<leader>T", ":ToggleTerm<return>", { desc = "Toggle terminal" })
 
 -- NvimTree
 local ntree = require("nvim-tree.api")
-prefix = "<leader>t"
-keymap.set("n", prefix .. "t", ntree.tree.toggle, { desc = "Toggle Nvim Tree" })
-keymap.set("n", prefix .. "l", ntree.tree.find_file, { desc = "Localize current file in a Tree" })
-keymap.set("n", prefix .. "c", ":NvimTreeCollapseKeepBuffers<return>", { desc = "Collapse Tree, except opened buffers" })
-keymap.set("n", prefix .. "r", ntree.tree.reload, { desc = "Refresh Tree" })
-keymap.set("n", prefix .. "a", ntree.tree.expand_all, { desc = "Expand all nodes" })
-keymap.set("n", prefix .. "A", ntree.tree.collapse_all, { desc = "Collapse all nodes" })
-keymap.set("n", prefix .. "h", ntree.tree.toggle_help, { desc = "Toggle help" })
-keymap.set("n", prefix .. "g", ntree.tree.toggle_gitignore_filter, { desc = "Toggle gitignore filter" })
-keymap.set("n", prefix .. "e", ntree.node.open.edit, { desc = "Open file in current window" })
-keymap.set("n", prefix .. "v", ntree.node.open.vertical, { desc = "Open file in vertical split" })
-keymap.set("n", prefix .. "s", ntree.node.open.horizontal, { desc = "Open file in horizontal split" })
-keymap.set("n", prefix .. "p", ntree.node.open.preview, { desc = "Preview file without focus" })
-keymap.set("n", prefix .. "n", ntree.fs.create, { desc = "Create file/directory" })
+local tree_prefix = "<leader>t"
+local tree_mappings = {
+    t = { ntree.tree.toggle, "Toggle Nvim Tree" },
+    l = { ntree.tree.find_file, "Localize current file in a Tree" },
+    c = { ":NvimTreeCollapseKeepBuffers<return>", "Collapse Tree, except opened buffers" },
+    r = { ntree.tree.reload, "Refresh Tree" },
+    a = { ntree.tree.expand_all, "Expand all nodes" },
+    A = { ntree.tree.collapse_all, "Collapse all nodes" },
+    h = { ntree.tree.toggle_help, "Toggle help" },
+    g = { ntree.tree.toggle_gitignore_filter, "Toggle gitignore filter" },
+    e = { ntree.node.open.edit, "Open file in current window" },
+    v = { ntree.node.open.vertical, "Open file in vertical split" },
+    s = { ntree.node.open.horizontal, "Open file in horizontal split" },
+    p = { ntree.node.open.preview, "Preview file without focus" },
+    n = { ntree.fs.create, "Create file/directory" },
+}
+for suffix, map in pairs(tree_mappings) do
+    keymap.set("n", tree_prefix .. suffix, map[1], { desc = map[2] })
+end
 
--- Conform formatter
-keymap.set("n", "<leader>f", function()
-    require("conform").format()
-end, { desc = "Format code" })
-keymap.set("n", "<leader>w", function()
-    require("conform").format()
-    vim.cmd("write")
-end, { desc = "Format and save code" })
+-- Formatting (Conform)
+local conform_keys = {
+    {
+        "n",
+        "<leader>f",
+        function()
+            require("conform").format()
+        end,
+        { desc = "Format code" },
+    },
+    {
+        "n",
+        "<leader>w",
+        function()
+            require("conform").format()
+            vim.cmd("write")
+        end,
+        { desc = "Format and save code" },
+    },
+}
+for _, args in ipairs(conform_keys) do
+    keymap.set(table.unpack(args))
+end
 
 -- Overseer
-keymap.set("n", "<leader>o", ":OverseerToggle<CR>", { desc = "Toggle Overseer" })
-keymap.set("n", "<leader>r", ":OverseerRun<CR>", { desc = "Overseer tasks run" })
+local overseer_keys = {
+    { "n", "<leader>o", ":OverseerToggle<CR>", { desc = "Toggle Overseer" } },
+    { "n", "<leader>r", ":OverseerRun<CR>", { desc = "Overseer tasks run" } },
+}
+for _, args in ipairs(overseer_keys) do
+    keymap.set(table.unpack(args))
+end
 
 -- Buffer manager
 keymap.set("n", "<leader>B", require("buffer_manager.ui").toggle_quick_menu, { desc = "Toggle buffers list" })
 
--- Inc rename
+-- Rename (IncRename)
 keymap.set("n", "<leader>R", ":IncRename ", { desc = "Incremental rename" })
 
--- Venv-selector
+-- Python venv (Venv-selector)
 keymap.set("n", "<leader>V", "<cmd>VenvSelect<cr>", { desc = "Select Python environment" })
 
--- DAP
-prefix = "<leader>d"
-vim.keymap.set("n", prefix .. "b", function()
-    require("dap").toggle_breakpoint()
-end, {
-    desc = "Toggle breakpoint",
-})
-vim.keymap.set("n", prefix .. "r", function()
-    require("dap").repl.open()
-end, {
-    desc = "Open REPL",
-})
-vim.keymap.set("n", prefix .. "l", function()
-    require("dap").run_last()
-end, {
-    desc = "Run last",
-})
-vim.keymap.set({ "n", "v" }, prefix .. "h", function()
-    require("dap.ui.widgets").hover()
-end, {
-    desc = "Hover widgets",
-})
-vim.keymap.set({ "n", "v" }, prefix .. "p", function()
-    require("dap.ui.widgets").preview()
-end, {
-    desc = "Preview",
-})
-vim.keymap.set("n", prefix .. "f", function()
-    local widgets = require("dap.ui.widgets")
-    widgets.centered_float(widgets.frames)
-end, {
-    desc = "List frames",
-})
-vim.keymap.set("n", prefix .. "s", function()
-    local widgets = require("dap.ui.widgets")
-    widgets.centered_float(widgets.scopes)
-end, {
-    desc = "List scopes",
-})
-
--- Gitlab
-if vim.g.gitlab_token then
-    local gitlab = require("gitlab")
-    prefix = "<leader>G"
-    vim.keymap.set("n", prefix .. "M", gitlab.choose_merge_request)
-    vim.keymap.set("n", prefix .. "s", gitlab.summary)
-    vim.keymap.set("n", prefix .. "r", gitlab.review)
-    vim.keymap.set("n", prefix .. "b", gitlab.open_in_browser)
-    vim.keymap.set("n", prefix .. "c", gitlab.create_comment)
-    vim.keymap.set("v", prefix .. "c", gitlab.create_multiline_comment)
-    vim.keymap.set("n", prefix .. "n", gitlab.create_note)
-    vim.keymap.set("n", prefix .. "d", gitlab.toggle_discussions)
+-- DAP (Debug Adapter Protocol) leader mappings
+local dap_prefix = "<leader>d"
+local dap_leader_mappings = {
+    b = {
+        function()
+            require("dap").toggle_breakpoint()
+        end,
+        "Toggle breakpoint",
+    },
+    r = {
+        function()
+            require("dap").repl.open()
+        end,
+        "Open REPL",
+    },
+    l = {
+        function()
+            require("dap").run_last()
+        end,
+        "Run last",
+    },
+    h = {
+        function()
+            require("dap.ui.widgets").hover()
+        end,
+        "Hover widgets",
+        { "n", "v" },
+    },
+    p = {
+        function()
+            require("dap.ui.widgets").preview()
+        end,
+        "Preview",
+        { "n", "v" },
+    },
+    f = {
+        function()
+            local widgets = require("dap.ui.widgets")
+            widgets.centered_float(widgets.frames)
+        end,
+        "List frames",
+    },
+    s = {
+        function()
+            local widgets = require("dap.ui.widgets")
+            widgets.centered_float(widgets.scopes)
+        end,
+        "List scopes",
+    },
+}
+for suffix, map in pairs(dap_leader_mappings) do
+    local modes = map[3] or "n"
+    keymap.set(modes, dap_prefix .. suffix, map[1], { desc = map[2] })
 end
 
 -- Trouble
-prefix = "<leader>x"
-vim.keymap.set("n", prefix .. "X", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics" })
-vim.keymap.set("n", prefix .. "x", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", {
-    desc = "Buffer Diagnostics",
-})
-vim.keymap.set("n", prefix .. "s", "<cmd>Trouble symbols toggle focus=false<cr>", {
-    desc = "Symbols",
-})
-vim.keymap.set("n", prefix .. "d", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", { desc = "LSP Definitions / references" })
-vim.keymap.set("n", prefix .. "l", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List" })
-vim.keymap.set("n", prefix .. "q", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List" })
+local trouble_prefix = "<leader>x"
+local trouble_keys = {
+    { "n", trouble_prefix .. "X", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics" } },
+    { "n", trouble_prefix .. "x", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics" } },
+    { "n", trouble_prefix .. "s", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols" } },
+    { "n", trouble_prefix .. "d", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", { desc = "LSP Definitions / references" } },
+    { "n", trouble_prefix .. "l", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List" } },
+    { "n", trouble_prefix .. "q", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List" } },
+}
+for _, args in ipairs(trouble_keys) do
+    keymap.set(table.unpack(args))
+end
 
 -- Spectre
-vim.keymap.set("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
-    desc = "Toggle Spectre",
-})
-vim.keymap.set("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-    desc = "Search current word",
-})
+local spectre_keys = {
+    { "n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', { desc = "Toggle Spectre" } },
+    { "n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', { desc = "Search current word" } },
+}
+for _, args in ipairs(spectre_keys) do
+    keymap.set(table.unpack(args))
+end
 
 -- Neotest
--- prefix e
--- moved to lua/plugins/neotest.lua because of long load time
+-- (moved to lua/plugins/neotest.lua because of long load time)
